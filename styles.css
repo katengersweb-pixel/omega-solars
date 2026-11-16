@@ -676,7 +676,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-kicker {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(13px, 1.6vw, 16px);
+  font-size: clamp(11px, 1.2vw, 13.5px);
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -688,7 +688,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-title-main {
   font-family: var(--font-display);
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(26px, 3.8vw, 48px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -700,7 +700,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-title-highlight {
   font-family: var(--font-display);
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(26px, 3.8vw, 48px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -715,10 +715,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-description {
-  font-size: clamp(15px, 2vw, 18px);
-  font-weight: 600;
-  color: #e2e8f0;
-  max-width: 580px;
+  font-size: clamp(13.5px, 1.4vw, 15.5px);
+  font-weight: 500;
+  color: #cbd5e1;
+  max-width: 500px;
   margin-bottom: 30px;
   line-height: 1.6;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
