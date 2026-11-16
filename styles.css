@@ -695,7 +695,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title-highlight {
-  font-size: clamp(38px, 5.5vw, 68px);
+  font-size: clamp(32px, 5.2vw, 64px);
   font-weight: 900;
   line-height: 1.08;
   font-style: italic;
