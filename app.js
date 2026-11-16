@@ -609,7 +609,7 @@ For a customized site survey, call us at +91 79810 54609.
 }
 
 // ============================================================================
-// 9. ANIMATED STAT COUNTERS ON SCROLL
+// 9. ANIMATED STAT COUNTERS ON SCROLL (SMOOTH EASING)
 // ============================================================================
 let countersAnimated = false;
 function animateStats() {
@@ -619,29 +619,53 @@ function animateStats() {
   const impactSection = document.getElementById('impact');
   if (!impactSection) return;
 
-  const rect = impactSection.getBoundingClientRect();
-  if (rect.top <= window.innerHeight - 80) {
+  function runCounter() {
+    if (countersAnimated) return;
     countersAnimated = true;
+
     statElements.forEach(el => {
-      const target = parseInt(el.getAttribute('data-count'), 10);
-      const isTonnes = el.textContent.includes('CO');
-      let count = 0;
-      const step = Math.max(1, Math.floor(target / 40));
-      const interval = setInterval(() => {
-        count += step;
-        if (count >= target) {
-          count = target;
-          clearInterval(interval);
-          el.textContent = `${target}+`;
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      const duration = 1800; // ms
+      const startTime = performance.now();
+
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out quad: 1 - (1 - progress) * (1 - progress)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentCount = Math.floor(easeOut * target);
+
+        el.textContent = `${currentCount}+`;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
         } else {
-          el.textContent = `${count}+`;
+          el.textContent = `${target}+`;
         }
-      }, 30);
+      }
+      requestAnimationFrame(updateCounter);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runCounter();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(impactSection);
+  } else {
+    window.addEventListener('scroll', () => {
+      const rect = impactSection.getBoundingClientRect();
+      if (rect.top <= window.innerHeight - 50) {
+        runCounter();
+      }
     });
   }
 }
-
-window.addEventListener('scroll', animateStats);
 
 // ============================================================================
 // 10. REVIEWS AUTO-ROTATING CAROUSEL
@@ -996,12 +1020,88 @@ function initGalleryInteractiveCarousel() {
   }
 }
 
+
 // ============================================================================
-// 11. INITIALIZATION
+// 11. SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
+// ============================================================================
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.reveal-on-scroll, .reveal-scale, .reveal-left, .reveal-right');
+  if (!elements.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+// ============================================================================
+// 12. MOBILE FLOATING ACTION BAR CONTROLLER
+// ============================================================================
+function initMobileActionBar() {
+  const mobileBar = document.getElementById('mobileActionBar');
+  const footer = document.querySelector('.footer');
+  if (!mobileBar || !footer) return;
+
+  window.addEventListener('scroll', () => {
+    const footerRect = footer.getBoundingClientRect();
+    // If footer is approaching bottom of viewport, slide bar down
+    if (footerRect.top < window.innerHeight + 10) {
+      mobileBar.classList.add('hidden-bottom');
+    } else {
+      mobileBar.classList.remove('hidden-bottom');
+    }
+  }, { passive: true });
+}
+
+// ============================================================================
+// 13. ACTIVE NAVIGATION HIGHLIGHTING ON SCROLL
+// ============================================================================
+function initActiveNavOnScroll() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  if (!sections.length || !navLinks.length) return;
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollY = window.pageYOffset;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 180;
+      const sectionHeight = section.offsetHeight;
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+    if (current) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    }
+  }, { passive: true });
+}
+
+// ============================================================================
+// 14. INITIALIZATION
 // ============================================================================
 document.addEventListener('DOMContentLoaded', () => {
   calculateSavings();
   animateStats();
   initReviewsCarousel();
   initGalleryInteractiveCarousel();
+  initScrollReveal();
+  initMobileActionBar();
+  initActiveNavOnScroll();
 });
