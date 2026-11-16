@@ -3,3 +3,5 @@ assets/partners/preview.html
 assets/team/*.backup
 *.log
 
+
+.vercel
