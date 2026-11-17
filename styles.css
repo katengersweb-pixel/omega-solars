@@ -1,43 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap');
 
 /* ==========================================================================
-   CSS VARIABLES & DESIGN SYSTEM (ECO GREEN THEME + ORIGINAL NAVY BACKGROUNDS)
+   CSS VARIABLES & DESIGN SYSTEM (LOGO THEME: OMEGA NAVY + SOLAR GOLD + ECO GREEN)
    ========================================================================== */
 :root {
-  /* Retained exact original background colors */
-  --primary-navy: #0b1f3a;
-  --dark-navy: #071426;
-  --deep-navy: #040c17;
-  --secondary-blue: #163b68;
-  --royal-blue: #1d4ed8;
+  /* Logo Signature Navy Palette (From Omega Text & Ohm Symbol #00285b) */
+  --primary-navy: #00285b;
+  --dark-navy: #001c40;
+  --deep-navy: #00122b;
+  --secondary-blue: #093774;
+  --royal-blue: #007dff;
   --bg-white: #ffffff;
   --bg-soft: #f8fafc;
+  --bg-gold-soft: #fffbeb;
   --bg-emerald-soft: #ecfdf5;
-  --text-main: #0f172a;
+  --text-main: #00285b;
+  --text-body: #334155;
   --text-muted: #64748b;
   --text-light: #94a3b8;
   --border-color: #e2e8f0;
   --border-light: rgba(255, 255, 255, 0.12);
 
-  /* Transformed Green Theme Color Tokens */
+  /* Logo Solar Sun Gold Tokens (From Sun Rays, Sun Disk & 'O' #ffb703) */
+  --accent-gold: #ffb703;
+  --accent-gold-hover: #ffa200;
+  --accent-gold-dark: #fb8500;
+  --accent-gold-light: #ffc300;
+  --accent-gold-pale: #fffbeb;
+  --accent-gold-border: #fde68a;
+
+  /* Solar Gold Gradients */
+  --gold-gradient: linear-gradient(135deg, #ffc300 0%, #ffb703 50%, #fb8500 100%);
+  --gold-bright-gradient: linear-gradient(135deg, #ffe066 0%, #ffb703 60%, #fb8500 100%);
+  --gold-glow-gradient: linear-gradient(135deg, #fff3b0 0%, #ffb703 50%, #fb8500 100%);
+
+  /* Logo Eco Green Tokens (From House Roof #0faa04 / #10b981) */
   --accent-green: #10b981;
   --accent-emerald: #059669;
   --accent-dark-green: #047857;
   --accent-mint: #34d399;
   --accent-light-mint: #a7f3d0;
   --accent-pale-green: #ecfdf5;
-  --accent-green-border: #a7f3d0;
-
-  /* Premium Green Gradients (replacing yellow/gold) */
   --green-gradient: linear-gradient(135deg, #10b981 0%, #059669 60%, #047857 100%);
   --green-bright-gradient: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
   --green-glow-gradient: linear-gradient(135deg, #6ee7b7 0%, #10b981 100%);
 
+  /* Logo Solar Blue (From Rooftop Solar Panels #007dff) */
+  --solar-blue: #007dff;
+  --solar-blue-light: #e0f2fe;
+
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 12px 16px -8px rgba(15, 23, 42, 0.06);
-  --shadow-glow: 0 15px 35px -5px rgba(16, 185, 129, 0.35);
+  --shadow-sm: 0 2px 8px rgba(0, 40, 91, 0.08);
+  --shadow-md: 0 10px 25px -5px rgba(0, 40, 91, 0.1), 0 8px 10px -6px rgba(0, 40, 91, 0.05);
+  --shadow-lg: 0 20px 40px -15px rgba(0, 40, 91, 0.16), 0 12px 16px -8px rgba(0, 40, 91, 0.08);
+  --shadow-glow: 0 14px 30px -5px rgba(255, 183, 3, 0.45);
+  --shadow-green-glow: 0 14px 30px -5px rgba(16, 185, 129, 0.35);
 
   /* Typography & Layout */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -147,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title span.highlight {
-  background: var(--green-bright-gradient);
+  background: var(--gold-bright-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -189,15 +206,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background: var(--green-gradient);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+  background: var(--gold-gradient);
+  color: #00285b;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 18px rgba(255, 183, 3, 0.38);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+  box-shadow: 0 8px 25px rgba(255, 183, 3, 0.55);
   filter: brightness(1.06);
 }
 
@@ -365,7 +384,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 0%;
   height: 2.5px;
-  background: var(--green-bright-gradient);
+  background: var(--gold-gradient);
   border-radius: 2px;
   transition: width var(--transition-fast);
 }
@@ -680,7 +699,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #f97316;
+  color: #ffb703;
   margin-bottom: 10px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.22s backwards;
@@ -706,11 +725,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   font-style: normal;
   display: inline-block;
-  color: #f59e0b;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #ea580c 100%);
+  color: #ffb703;
+  background: linear-gradient(135deg, #ffc300 0%, #ffb703 50%, #fb8500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 20px rgba(245, 158, 11, 0.35));
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 20px rgba(255, 183, 3, 0.4));
   animation: heroSlideUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.46s backwards;
 }
 
@@ -1060,7 +1079,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 6px;
-  background: var(--green-bright-gradient);
+  background: var(--gold-bright-gradient);
 }
 
 .about-badge-img {
@@ -1159,7 +1178,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 20%;
   width: 60%;
   height: 200%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 183, 3, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1167,8 +1186,9 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   width: max-content;
   margin: 0 auto 30px;
-  background: var(--green-gradient);
-  color: white;
+  background: var(--gold-gradient);
+  color: #00285b;
+  font-weight: 800;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.5px;
@@ -1203,7 +1223,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-size: clamp(34px, 4.5vw, 54px);
   font-weight: 900;
-  background: var(--green-glow-gradient);
+  background: var(--gold-glow-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
@@ -1638,8 +1658,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .calc-box-icon.blue { background: #eff6ff; color: #2563eb; }
 .calc-box-icon.green { background: #ecfdf5; color: #059669; }
-.calc-box-icon.yellow { background: #d1fae5; color: #047857; }
-.calc-box-icon.orange { background: #ecfdf5; color: #059669; }
+.calc-box-icon.yellow { background: #fffbeb; color: #d97706; }
+.calc-box-icon.orange { background: #fff7ed; color: #ea580c; }
 
 .calc-box-meta {
   flex: 1;
@@ -1661,7 +1681,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .calc-box-meta strong.text-green { color: #059669; }
-.calc-box-meta strong.text-orange { color: #059669; }
+.calc-box-meta strong.text-orange { color: #d97706; }
 
 .calc-empty-state {
   border: 2px dashed #e2e8f0;
@@ -1715,9 +1735,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .filter-btn:hover, .filter-btn.active {
-  background: var(--green-gradient);
-  color: white;
-  border-color: #10b981;
+  background: var(--gold-gradient);
+  color: #00285b;
+  font-weight: 700;
+  border-color: #ffb703;
+  box-shadow: 0 4px 14px rgba(255, 183, 3, 0.35);
 }
 
 /* Gallery Carousel Wrapper & Continuous Mouse-Interactive Track */
@@ -1896,8 +1918,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .team-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-lg), 0 12px 28px rgba(16, 185, 129, 0.15);
-  border-color: #a7f3d0;
+  box-shadow: var(--shadow-lg), 0 12px 28px rgba(255, 183, 3, 0.25);
+  border-color: #fde68a;
 }
 
 .team-avatar-wrap {
@@ -1905,8 +1927,8 @@ h1, h2, h3, h4, h5, h6 {
   height: 170px;
   border-radius: 50%;
   padding: 6px;
-  background: var(--green-bright-gradient);
-  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+  background: var(--gold-bright-gradient);
+  box-shadow: 0 12px 30px rgba(255, 183, 3, 0.35);
   margin-bottom: 22px;
   position: relative;
 }
@@ -1930,9 +1952,9 @@ h1, h2, h3, h4, h5, h6 {
 .team-role {
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #059669;
+  color: #d97706;
   margin-bottom: 12px;
 }
 
@@ -2096,11 +2118,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .carousel-nav-btn:hover {
-  background: #10b981;
-  color: white;
-  border-color: #10b981;
+  background: var(--gold-gradient);
+  color: #00285b;
+  border-color: #ffb703;
   transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 8px 20px rgba(255, 183, 3, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -2134,7 +2156,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .carousel-dot.active {
   width: 28px;
-  background: #10b981;
+  background: #ffb703;
   border-radius: 12px;
 }
 
@@ -2143,7 +2165,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-lg);
   padding: 18px 20px;
   border: 1px solid #e2e8f0;
-  border-top: 3.5px solid #10b981;
+  border-top: 3.5px solid #00285b;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
@@ -2157,8 +2179,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .review-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(0, 40, 91, 0.1);
+  border-top-color: #ffb703;
 }
 
 .review-header {
@@ -2790,7 +2812,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: clamp(11.5px, 3.2vw, 13.5px) !important;
     letter-spacing: 0.8px !important;
     line-height: 1.35 !important;
-    color: #a7f3d0 !important;
+    color: #fed7aa !important;
     font-weight: 700 !important;
     display: block !important;
   }
